@@ -20,7 +20,7 @@ with open("data.json") as file:
     parliament_html_full_content = remove_spaces(parliament_html_full_content)
     parliament_html_full_content = remove_column_text(parliament_html_full_content)
 
-h = html2text.HTML2Text()
+h = html2text.HTML2Text(bodywidth=0)
 print(h.handle(parliament_html_full_content))
 
 
