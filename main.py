@@ -1,11 +1,12 @@
-from enum import Enum, auto
+from enum import Enum, StrEnum, auto
 import json
 import re
 
 import html2text
 from pydantic import BaseModel
 
-from oral_answer_section import get_oral_answer_line_type
+from attendance_line_type import get_attendance_line_type
+from transcript_line_type import get_transcript_line_type
 
 
 def remove_spaces(original_text: str) -> str:
@@ -17,7 +18,7 @@ def remove_column_text(original_text: str) -> str:
     return re.sub(pattern, "", original_text)
 
 
-class Section(Enum):
+class Section(StrEnum):
     META = auto()
     ATTENDANCE = auto()
     TRANSCRIPT = auto()
@@ -59,13 +60,21 @@ for index, text in enumerate(parsed_handsard_data):
     line_number_to_handsard_data_index[index]["content"] = text
 
 for line_number, handsard_data in line_number_to_handsard_data_index.items():
-    if handsard_data["section"] != Section.TRANSCRIPT:
-        handsard_data["content_type"] = None
+    if handsard_data["section"] == Section.TRANSCRIPT:
+        handsard_data["content_type"] = get_transcript_line_type(
+            handsard_data["content"]
+        )
         continue
-    handsard_data["content_type"] = get_oral_answer_line_type(handsard_data["content"])
+    if handsard_data["section"] == Section.ATTENDANCE:
+        handsard_data["content_type"] = get_attendance_line_type(
+            handsard_data["content"]
+        )
+        continue
+
+    handsard_data["content_type"] = None
 
 
-print(line_number_to_handsard_data_index)
+print(json.dumps(line_number_to_handsard_data_index))
 
 
 # class Speech(BaseModel):

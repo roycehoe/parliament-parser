@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import StrEnum, auto
 import re
 
 
@@ -24,7 +24,7 @@ def is_blank_line(text: str) -> bool:
     return text.strip() == ""
 
 
-class OralAnswerLineType(Enum):
+class TranscriptLineType(StrEnum):
     TITLE = auto()
     SUBTITLE = auto()
     BLANK = auto()
@@ -33,26 +33,15 @@ class OralAnswerLineType(Enum):
     CONTD_TEXT = auto()
 
 
-def get_oral_answer_line_type(text: str) -> OralAnswerLineType:
+def get_transcript_line_type(text: str) -> TranscriptLineType:
     if is_blank_line(text):
-        return OralAnswerLineType.BLANK
+        return TranscriptLineType.BLANK
     if is_oral_answer_title(text):
-        return OralAnswerLineType.TITLE
+        return TranscriptLineType.TITLE
     if is_oral_answer_subtitle(text):
-        return OralAnswerLineType.SUBTITLE
+        return TranscriptLineType.SUBTITLE
     if is_question(text):
-        return OralAnswerLineType.QUESTION
+        return TranscriptLineType.QUESTION
     if is_answer(text):
-        return OralAnswerLineType.ANSWER
-    return OralAnswerLineType.CONTD_TEXT
-
-
-line_label_mapping = {}
-
-
-with open("oral_answer_section.md") as file:
-    for i, t in enumerate(file):
-        line_label_mapping[i] = get_oral_answer_line_type(t)
-
-
-print(line_label_mapping)
+        return TranscriptLineType.ANSWER
+    return TranscriptLineType.CONTD_TEXT
