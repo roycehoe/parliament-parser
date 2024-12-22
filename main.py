@@ -1,8 +1,11 @@
+from enum import Enum, auto
 import json
 import re
 
 import html2text
 from pydantic import BaseModel
+
+from oral_answer_section import get_oral_answer_line_type
 
 
 def remove_spaces(original_text: str) -> str:
@@ -14,28 +17,55 @@ def remove_column_text(original_text: str) -> str:
     return re.sub(pattern, "", original_text)
 
 
-with open("data.json") as file:
-    parliament_data = json.load(file)
-    parliament_html_full_content = parliament_data.get("htmlFullContent")
-    parliament_html_full_content = remove_spaces(parliament_html_full_content)
-    parliament_html_full_content = remove_column_text(parliament_html_full_content)
-
-h = html2text.HTML2Text(bodywidth=0)
-print(h.handle(parliament_html_full_content))
+class Section(Enum):
+    META = auto()
+    ATTENDANCE = auto()
+    TRANSCRIPT = auto()
 
 
-"""
-# Formatted MD rules
-
-## Section: Oral answers
-
-1. Everything after "#### ORAL ANSWERS TO QUESTIONS" will be part of the oral answers section
-2. Each oral answer consists of a question and a list of answers
-2. The start of each oral answer section is denoted by a space, a bolded all-caps header, another space, a sub-header, followed by three spaces
+def is_start_of_attendance(text: str) -> bool:
+    return text == "PRESENT:   "
 
 
+def is_start_of_transcript(text: str) -> bool:
+    return text == "#### [Mr Speaker in the Chair]"
 
-"""
+
+def get_parsed_handsard_data() -> list[str]:
+    h = html2text.HTML2Text(bodywidth=0)
+    with open("data.json") as file:
+        parliament_data = json.load(file)
+        parliament_html_full_content = parliament_data.get("htmlFullContent")
+        parliament_html_full_content = remove_spaces(parliament_html_full_content)
+        parliament_html_full_content = remove_column_text(parliament_html_full_content)
+    md_file = h.handle(parliament_html_full_content)
+    return md_file.split("\n")
+
+
+parsed_handsard_data = get_parsed_handsard_data()
+line_number_to_handsard_data_index = {}
+
+current_section = Section.META
+for index, text in enumerate(parsed_handsard_data):
+    line_number_to_handsard_data_index[index] = {}
+
+for index, text in enumerate(parsed_handsard_data):
+    if is_start_of_attendance(text):
+        current_section = Section.ATTENDANCE
+    if is_start_of_transcript(text):
+        current_section = Section.TRANSCRIPT
+    line_number_to_handsard_data_index[index]["section"] = current_section
+    line_number_to_handsard_data_index[index]["line_number"] = index
+    line_number_to_handsard_data_index[index]["content"] = text
+
+for line_number, handsard_data in line_number_to_handsard_data_index.items():
+    if handsard_data["section"] != Section.TRANSCRIPT:
+        handsard_data["content_type"] = None
+        continue
+    handsard_data["content_type"] = get_oral_answer_line_type(handsard_data["content"])
+
+
+print(line_number_to_handsard_data_index)
 
 
 # class Speech(BaseModel):

@@ -21,7 +21,7 @@ def is_answer(text: str) -> bool:
 
 
 def is_blank_line(text: str) -> bool:
-    return text.isspace()
+    return text.strip() == ""
 
 
 class OralAnswerLineType(Enum):
@@ -34,12 +34,12 @@ class OralAnswerLineType(Enum):
 
 
 def get_oral_answer_line_type(text: str) -> OralAnswerLineType:
+    if is_blank_line(text):
+        return OralAnswerLineType.BLANK
     if is_oral_answer_title(text):
         return OralAnswerLineType.TITLE
     if is_oral_answer_subtitle(text):
         return OralAnswerLineType.SUBTITLE
-    if is_blank_line(text):
-        return OralAnswerLineType.BLANK
     if is_question(text):
         return OralAnswerLineType.QUESTION
     if is_answer(text):
@@ -55,4 +55,4 @@ with open("oral_answer_section.md") as file:
         line_label_mapping[i] = get_oral_answer_line_type(t)
 
 
-print({k: v for k, v in line_label_mapping.items() if v != OralAnswerLineType.BLANK})
+print(line_label_mapping)
