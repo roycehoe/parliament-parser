@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "md-convert"
+version = "0.1.0"
+description = ""
+authors = ["roycehoe <royceinbox@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+markdownify = "^0.14.1"
+html2text = "^2024.2.26"
+pydantic = "^2.10.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
