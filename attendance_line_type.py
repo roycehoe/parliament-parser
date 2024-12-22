@@ -27,6 +27,7 @@ def is_assent_to_bills_passed_header(text: str) -> bool:
 
 class AttendanceLineType(StrEnum):
     BLANK = auto()
+    LINE_BREAK = auto()
     PRESENT_HEADER = auto()
     ABSENT_HEADER = auto()
     ABSENT_PERMISSION_HEADER = auto()
@@ -37,6 +38,8 @@ class AttendanceLineType(StrEnum):
 def get_attendance_line_type(text: str) -> AttendanceLineType:
     if is_blank_line(text):
         return AttendanceLineType.BLANK
+    if is_line_break(text):
+        return AttendanceLineType.LINE_BREAK
     if is_present_marker(text):
         return AttendanceLineType.PRESENT_HEADER
     if is_absent_header(text):
