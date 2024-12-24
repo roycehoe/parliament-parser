@@ -49,3 +49,12 @@ def get_attendance_line_type(text: str) -> AttendanceLineType:
     if is_assent_to_bills_passed_header(text):
         return AttendanceLineType.ASSENT_TO_BILLS_PASSED_HEADER
     return AttendanceLineType.TEXT
+
+
+def get_attendance_tagged_data(
+    handsard_attendance_data: list[str],
+) -> zip[tuple[str, AttendanceLineType]]:
+    attendance_tags: list[AttendanceLineType] = [
+        get_attendance_line_type(line) for line in handsard_attendance_data
+    ]
+    return zip(handsard_attendance_data, attendance_tags)

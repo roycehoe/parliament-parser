@@ -1,21 +1,12 @@
-from enum import Enum, StrEnum, auto
+from enum import StrEnum, auto
 import json
-import re
 
 import html2text
 from pydantic import BaseModel
 
-from attendance_line_type import get_attendance_line_type
-from transcript_line_type import get_transcript_line_type
-
-
-def remove_spaces(original_text: str) -> str:
-    return original_text.replace("&nbsp;", "")
-
-
-def remove_column_text(original_text: str) -> str:
-    pattern = r"<br><br><font size=\"1\"><b>Column: \d+</b></font><br><br>"
-    return re.sub(pattern, "", original_text)
+from cleaining import remove_column_text, remove_spaces
+from tagging.attendance import get_attendance_line_type
+from tagging.transcript import get_transcript_line_type
 
 
 class Section(StrEnum):
@@ -32,18 +23,19 @@ def is_start_of_transcript(text: str) -> bool:
     return text == "#### [Mr Speaker in the Chair]"
 
 
-def get_parsed_handsard_data() -> list[str]:
+def get_parsed_handsard_data(path: str) -> list[str]:
     h = html2text.HTML2Text(bodywidth=0)
-    with open("data.json") as file:
+    with open(path) as file:
         parliament_data = json.load(file)
         parliament_html_full_content = parliament_data.get("htmlFullContent")
         parliament_html_full_content = remove_spaces(parliament_html_full_content)
         parliament_html_full_content = remove_column_text(parliament_html_full_content)
     md_file = h.handle(parliament_html_full_content)
+    print(md_file)
     return md_file.split("\n")
 
 
-parsed_handsard_data = get_parsed_handsard_data()
+parsed_handsard_data = get_parsed_handsard_data("test.json")
 line_number_to_handsard_data_index = {}
 
 current_section = Section.META
