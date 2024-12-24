@@ -9,11 +9,15 @@ class Section(StrEnum):
 
 
 def is_start_of_attendance(text: str) -> bool:
-    return text == "PRESENT:   "
+    return "PRESENT:" in text
 
 
 def is_start_of_transcript(text: str) -> bool:
-    return text == "#### [Mr Speaker in the Chair]"
+    return (
+        "ORAL ANSWER TO QUESTION" in text
+        or "ORAL ANSWERS TO QUESTIONS" in text
+        or "[MR SPEAKER IN THE CHAIR]" in text
+    )
 
 
 def get_next_section(section: Section) -> Section:
@@ -22,7 +26,9 @@ def get_next_section(section: Section) -> Section:
     return Section.TRANSCRIPT
 
 
-def get_section_tagged_handsard(handsard_data: list[str]) -> Iterable[tuple[str, Section]]:
+def get_section_tagged_handsard(
+    handsard_data: list[str],
+) -> Iterable[tuple[str, Section]]:
     section_tags: list[Section] = []
 
     current_section = Section.META
