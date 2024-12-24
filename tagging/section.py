@@ -1,4 +1,5 @@
 from enum import StrEnum, auto
+from typing import Iterable
 
 
 class Section(StrEnum):
@@ -21,7 +22,7 @@ def get_next_section(section: Section) -> Section:
     return Section.TRANSCRIPT
 
 
-def get_section_tagged_handsard(handsard_data: list[str]) -> zip[tuple[str, Section]]:
+def get_section_tagged_handsard(handsard_data: list[str]) -> Iterable[tuple[str, Section]]:
     section_tags: list[Section] = []
 
     current_section = Section.META

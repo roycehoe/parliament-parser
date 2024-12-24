@@ -1,4 +1,5 @@
 from enum import StrEnum, auto
+from typing import Iterable
 
 
 def is_blank_line(text: str) -> bool:
@@ -53,7 +54,7 @@ def get_attendance_line_type(text: str) -> AttendanceLineType:
 
 def get_attendance_tagged_data(
     handsard_attendance_data: list[str],
-) -> zip[tuple[str, AttendanceLineType]]:
+) -> Iterable[tuple[str, AttendanceLineType]]:
     attendance_tags: list[AttendanceLineType] = [
         get_attendance_line_type(line) for line in handsard_attendance_data
     ]

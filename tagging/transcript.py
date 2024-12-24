@@ -1,5 +1,6 @@
 from enum import StrEnum, auto
 import re
+from typing import Iterable
 
 
 def is_oral_answer_title(text: str) -> bool:
@@ -49,7 +50,7 @@ def get_transcript_line_type(text: str) -> TranscriptLineType:
 
 def get_transcript_tagged_data(
     handsard_transcript_data: list[str],
-) -> zip[tuple[str, TranscriptLineType]]:
+) -> Iterable[tuple[str, TranscriptLineType]]:
     transcript_tags: list[TranscriptLineType] = [
         get_transcript_line_type(line) for line in handsard_transcript_data
     ]
