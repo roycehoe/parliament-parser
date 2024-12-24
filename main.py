@@ -2,10 +2,11 @@ import json
 
 import html2text
 
-from cleaining import remove_column_text, remove_spaces
-from tagging.attendance import get_attendance_line_type
+from cleaining import remove_column_text, remove_html_spaces, remove_spaces
+from tagging.attendance import get_attendance_line_type, get_attendance_tagged_handsard
 from tagging.section import Section, get_section_tagged_handsard
-from tagging.transcript import get_transcript_line_type
+from tagging.speaker import get_speaker_tagged_handsard
+from tagging.transcript import get_transcript_line_type, get_transcript_tagged_handsard
 
 PATH = "test.json"
 
@@ -15,40 +16,40 @@ def get_parsed_handsard_data(path: str) -> list[str]:
     with open(path) as file:
         parliament_data = json.load(file)
         parliament_html_full_content = parliament_data.get("htmlFullContent")
-        parliament_html_full_content = remove_spaces(parliament_html_full_content)
+        parliament_html_full_content = remove_html_spaces(parliament_html_full_content)
         parliament_html_full_content = remove_column_text(parliament_html_full_content)
     md_file = h.handle(parliament_html_full_content)
-    return md_file.split("\n")
+    return [remove_spaces(line) for line in md_file.split("\n")]
 
 
-def main(path):
-    parsed_handsard_data = get_parsed_handsard_data(path)
-    section_tagged_handsard = get_section_tagged_handsard(parsed_handsard_data)
+def get_line_number_to_handsard_data_index_base(
+    parsed_handsard_data: list[str],
+) -> dict[int, dict]:
     line_number_to_handsard_data_index = {}
 
     for index, text in enumerate(parsed_handsard_data):
         line_number_to_handsard_data_index[index] = {}
         line_number_to_handsard_data_index[index]["text"] = text
-
-    for index, (_, section) in enumerate(section_tagged_handsard):
-        line_number_to_handsard_data_index[index]["section"] = section
-
-    for index, text in enumerate(parsed_handsard_data):
-        line_number_to_handsard_data_index[index]["attendance_type"] = (
-            get_attendance_line_type(text)
-            if line_number_to_handsard_data_index[index]["section"]
-            == Section.ATTENDANCE
-            else None
-        )
-
-    for index, text in enumerate(parsed_handsard_data):
-        line_number_to_handsard_data_index[index]["transcript_type"] = (
-            get_transcript_line_type(text)
-            if line_number_to_handsard_data_index[index]["section"]
-            == Section.TRANSCRIPT
-            else None
-        )
     return line_number_to_handsard_data_index
+
+
+def main(path):
+    parsed_handsard_data = get_parsed_handsard_data(path)
+    handsard_index = get_line_number_to_handsard_data_index_base(parsed_handsard_data)
+    handsard_index_with_section_tag = get_section_tagged_handsard(
+        parsed_handsard_data, handsard_index
+    )
+    handsard_index_with_transcript_tag = get_transcript_tagged_handsard(
+        parsed_handsard_data, handsard_index_with_section_tag
+    )
+    handsard_index_with_attendance_tag = get_attendance_tagged_handsard(
+        parsed_handsard_data, handsard_index_with_transcript_tag
+    )
+    handsard_index_with_speaker_tag = get_speaker_tagged_handsard(
+        parsed_handsard_data, handsard_index_with_attendance_tag
+    )
+
+    return handsard_index_with_speaker_tag
 
 
 print(json.dumps(main("./data/03-03-2005.json")))

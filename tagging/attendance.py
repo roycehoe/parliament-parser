@@ -1,17 +1,19 @@
 from enum import StrEnum, auto
 from typing import Iterable
 
+from tagging.section import Section
+
 
 def is_blank_line(text: str) -> bool:
     return text.strip() == ""
 
 
 def is_present_marker(text: str) -> bool:
-    return text == "PRESENT:   "
+    return text == "PRESENT:"
 
 
 def is_absent_header(text: str) -> bool:
-    return text == "ABSENT:   "
+    return text == "ABSENT:"
 
 
 def is_line_break(text: str) -> bool:
@@ -52,10 +54,28 @@ def get_attendance_line_type(text: str) -> AttendanceLineType:
     return AttendanceLineType.TEXT
 
 
-def get_attendance_tagged_data(
+def get_attendance_tagged_lines(
     handsard_attendance_data: list[str],
 ) -> Iterable[tuple[str, AttendanceLineType]]:
     attendance_tags: list[AttendanceLineType] = [
         get_attendance_line_type(line) for line in handsard_attendance_data
     ]
     return zip(handsard_attendance_data, attendance_tags)
+
+
+def get_attendance_tagged_handsard(
+    parsed_handsard_data, line_number_to_handsard_data_index
+):
+    result = {}
+    attendance_tagged_handsard = get_attendance_tagged_lines(parsed_handsard_data)
+    for index, (_, attendance) in enumerate(attendance_tagged_handsard):
+        result[index] = {
+            **line_number_to_handsard_data_index[index],
+            "attendance_tag": (
+                attendance
+                if line_number_to_handsard_data_index[index]["section"]
+                == Section.ATTENDANCE
+                else None
+            ),
+        }
+    return result
