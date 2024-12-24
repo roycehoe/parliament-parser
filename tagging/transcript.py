@@ -13,12 +13,9 @@ def is_oral_answer_subtitle(text: str) -> bool:
     return bool(re.search(pattern, text))
 
 
-def is_question(text: str) -> bool:
-    return text[0].isnumeric()
-
-
-def is_answer(text: str) -> bool:
-    return text[:2] == "**"
+def is_speech(text: str) -> bool:
+    contains_bolded_text_pattern = r"\*\*.*?\*\*"
+    return bool(re.search(contains_bolded_text_pattern, text))
 
 
 def is_blank_line(text: str) -> bool:
@@ -29,8 +26,7 @@ class TranscriptLineType(StrEnum):
     TITLE = auto()
     SUBTITLE = auto()
     BLANK = auto()
-    QUESTION = auto()
-    ANSWER = auto()
+    SPEECH = auto()
     CONTD_TEXT = auto()
 
 
@@ -41,10 +37,8 @@ def get_transcript_line_type(text: str) -> TranscriptLineType:
         return TranscriptLineType.TITLE
     if is_oral_answer_subtitle(text):
         return TranscriptLineType.SUBTITLE
-    if is_question(text):
-        return TranscriptLineType.QUESTION
-    if is_answer(text):
-        return TranscriptLineType.ANSWER
+    if is_speech(text):
+        return TranscriptLineType.SPEECH
     return TranscriptLineType.CONTD_TEXT
 
 

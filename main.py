@@ -5,9 +5,11 @@ import html2text
 from pydantic import BaseModel
 
 from cleaining import remove_column_text, remove_spaces
-from tagging.attendance import get_attendance_line_type, get_attendance_tagged_data
+from tagging.attendance import get_attendance_line_type
 from tagging.section import Section, get_section_tagged_handsard
 from tagging.transcript import get_transcript_line_type
+
+PATH = "test.json"
 
 
 def get_parsed_handsard_data(path: str) -> list[str]:
@@ -21,7 +23,7 @@ def get_parsed_handsard_data(path: str) -> list[str]:
     return md_file.split("\n")
 
 
-parsed_handsard_data = get_parsed_handsard_data("test.json")
+parsed_handsard_data = get_parsed_handsard_data(PATH)
 section_tagged_handsard = get_section_tagged_handsard(parsed_handsard_data)
 line_number_to_handsard_data_index = {}
 
