@@ -18,6 +18,7 @@ def is_start_of_transcript(text: str) -> bool:
         or "ORAL ANSWERS TO QUESTIONS" in text
         or "[MR SPEAKER IN THE CHAIR]" in text
         or "[Mr Speaker in the Chair]" in text
+        or "PRESIDENT'S ADDRESS" in text
     )
 
 

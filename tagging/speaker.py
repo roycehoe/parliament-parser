@@ -14,7 +14,12 @@ def get_speaker_tagged_lines(
     for line in handsard_data:
         match = re.findall(bold_pattern, line)
         if match:
-            current_speaker = match[0]
+            # Check if the line consists exclusively of bolded text
+            if line.strip() == f"**{match[0]}**":
+                current_speaker = None
+            else:
+                # Remove trailing colon if it exists
+                current_speaker = match[0].rstrip(":")
         speaker_tags.append(current_speaker)
 
     return zip(handsard_data, speaker_tags)
