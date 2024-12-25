@@ -8,7 +8,7 @@ def get_speaker_tagged_lines(
     handsard_data: list[str],
 ) -> Iterable[tuple[str, str | None]]:
     speaker_tags: list[str | None] = []
-    bold_pattern = r"\*\*(.*?)\*\*"
+    bold_pattern = r"\*\*(\w.*?)\*\*"
     current_speaker = None
 
     for line in handsard_data:

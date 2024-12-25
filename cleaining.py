@@ -13,3 +13,8 @@ def remove_column_text(original_text: str) -> str:
     html_column_pattern = r"<br><br><font size=\"1\"><b>Column: \d+</b></font><br><br>"
     column_pattern = r"Column:\s*\d+"
     return re.sub(f"{html_column_pattern}|{column_pattern}", "", original_text)
+
+
+def remove_page_text(original_text: str) -> str:
+    column_pattern = r"Page:\s*\d+"
+    return re.sub(f"{column_pattern}", "", original_text)

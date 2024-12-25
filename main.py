@@ -2,7 +2,12 @@ import json
 
 import html2text
 
-from cleaining import remove_column_text, remove_html_spaces, remove_spaces
+from cleaining import (
+    remove_column_text,
+    remove_html_spaces,
+    remove_page_text,
+    remove_spaces,
+)
 from tagging.attendance import get_attendance_line_type, get_attendance_tagged_handsard
 from tagging.section import Section, get_section_tagged_handsard
 from tagging.speaker import get_speaker_tagged_handsard
@@ -18,6 +23,7 @@ def get_parsed_handsard_data(path: str) -> list[str]:
         parliament_html_full_content = parliament_data.get("htmlFullContent")
         parliament_html_full_content = remove_html_spaces(parliament_html_full_content)
         parliament_html_full_content = remove_column_text(parliament_html_full_content)
+        parliament_html_full_content = remove_page_text(parliament_html_full_content)
     md_file = h.handle(parliament_html_full_content)
     return [remove_spaces(line) for line in md_file.split("\n")]
 
@@ -52,4 +58,4 @@ def main(path):
     return handsard_index_with_speaker_tag
 
 
-print(json.dumps(main("./data/03-03-2005.json")))
+# print(json.dumps(main("./data/03-03-2005.json")))
