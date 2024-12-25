@@ -6,6 +6,7 @@ class Section(StrEnum):
     META = auto()
     ATTENDANCE = auto()
     TRANSCRIPT = auto()
+    ANNEX = auto()
 
 
 def is_start_of_attendance(text: str) -> bool:
@@ -22,10 +23,8 @@ def is_start_of_transcript(text: str) -> bool:
     )
 
 
-def get_next_section(section: Section) -> Section:
-    if section == Section.META:
-        return Section.ATTENDANCE
-    return Section.TRANSCRIPT
+def is_start_of_annex(text: str) -> bool:
+    return text == "Adjourned accordingly at"
 
 
 def get_section_tagged_lines(
@@ -39,16 +38,18 @@ def get_section_tagged_lines(
             current_section = Section.ATTENDANCE
         if is_start_of_transcript(line):
             current_section = Section.TRANSCRIPT
+        if is_start_of_annex(line):
+            current_section = Section.ANNEX
         section_tags.append(current_section)
 
     return zip(lines, section_tags)
 
 
-def get_section_tagged_handsard(
-    handsard_lines_data: list[dict]
-):
+def get_section_tagged_handsard(handsard_lines_data: list[dict]):
     result = []
-    section_tagged_handsard = get_section_tagged_lines([handsard_line_data["text"] for handsard_line_data in handsard_lines_data])
+    section_tagged_handsard = get_section_tagged_lines(
+        [handsard_line_data["text"] for handsard_line_data in handsard_lines_data]
+    )
     for index, (_, section) in enumerate(section_tagged_handsard):
         result.append({**handsard_lines_data[index], "section": section})
     return result
