@@ -11,6 +11,7 @@ from cleaining import (
 from tagging.attendance import get_attendance_line_type, get_attendance_tagged_handsard
 from tagging.section import Section, get_section_tagged_handsard
 from tagging.speaker import get_speaker_tagged_handsard
+from tagging.topic import get_topic_tagged_handsard
 from tagging.transcript import (
     get_transcript_line_type,
     get_transcript_data_tagged_handsard,
@@ -48,8 +49,12 @@ def main(path):
     handsard_index_with_speaker_tag = get_speaker_tagged_handsard(
         handsard_index_with_attendance_tag
     )
-
     return handsard_index_with_speaker_tag
+    # handsard_index_with_topic_tag = get_topic_tagged_handsard(
+    #     handsard_index_with_speaker_tag
+    # )
+
+    # return handsard_index_with_topic_tag
 
 
-print(json.dumps(main("./data/03-03-2005.json")))
+print(json.dumps(main("./data/09-04-1963.json")))

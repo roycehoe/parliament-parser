@@ -6,11 +6,16 @@ from tagging.section import Section
 
 
 def is_oral_answer_title(text: str) -> bool:
-    pattern = r"\*\*[A-Z\s]+\*\*"
+    pattern = r"^\*\*[A-Z\s]+\*\*$"
     return bool(re.search(pattern, text))
 
 
 def is_oral_answer_subtitle(text: str) -> bool:
+    if text == "**[Mr Speaker in the Chair]**":
+        return False
+    if text.endswith(":**"):
+        return False
+
     pattern = r"(?m)^\*\*(?=.*[a-z])[^*]+\*\*$"
     return bool(re.search(pattern, text))
 
@@ -53,11 +58,11 @@ def get_transcript_tagged_lines(
     return zip(handsard_transcript_data, transcript_tags)
 
 
-def get_transcript_data_tagged_handsard(
-    handsard_lines_data: list[dict]
-):
+def get_transcript_data_tagged_handsard(handsard_lines_data: list[dict]):
     result = []
-    transcript_tagged_handsard = get_transcript_tagged_lines([handsard_line_data["text"] for handsard_line_data in handsard_lines_data])
+    transcript_tagged_handsard = get_transcript_tagged_lines(
+        [handsard_line_data["text"] for handsard_line_data in handsard_lines_data]
+    )
     for index, (_, transcript_tag) in enumerate(transcript_tagged_handsard):
         if handsard_lines_data[index]["section"] != Section.TRANSCRIPT:
             result.append({**handsard_lines_data[index], "transcript_tag": None})

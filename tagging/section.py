@@ -24,7 +24,7 @@ def is_start_of_transcript(text: str) -> bool:
 
 
 def is_start_of_annex(text: str) -> bool:
-    return text == "Adjourned accordingly at"
+    return "Adjourned accordingly at" in text
 
 
 def get_section_tagged_lines(
