@@ -36,6 +36,7 @@ def get_line_number_to_handsard_data_index_base(
     for index, text in enumerate(parsed_handsard_data):
         line_number_to_handsard_data_index[index] = {}
         line_number_to_handsard_data_index[index]["text"] = text
+        line_number_to_handsard_data_index[index]["line_number"] = index
     return line_number_to_handsard_data_index
 
 

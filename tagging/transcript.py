@@ -53,6 +53,7 @@ def get_transcript_tagged_lines(
     return zip(handsard_transcript_data, transcript_tags)
 
 
+
 def get_transcript_tagged_handsard(
     parsed_handsard_data, line_number_to_handsard_data_index
 ):
