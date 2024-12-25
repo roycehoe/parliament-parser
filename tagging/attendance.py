@@ -63,19 +63,15 @@ def get_attendance_tagged_lines(
     return zip(handsard_attendance_data, attendance_tags)
 
 
-def get_attendance_tagged_handsard(
-    parsed_handsard_data, line_number_to_handsard_data_index
-):
-    result = {}
-    attendance_tagged_handsard = get_attendance_tagged_lines(parsed_handsard_data)
-    for index, (_, attendance) in enumerate(attendance_tagged_handsard):
-        result[index] = {
-            **line_number_to_handsard_data_index[index],
-            "attendance_tag": (
-                attendance
-                if line_number_to_handsard_data_index[index]["section"]
-                == Section.ATTENDANCE
-                else None
-            ),
-        }
+def get_attendance_tagged_handsard(handsard_lines_data: list[dict]):
+    result = []
+    attendance_tagged_lines = get_attendance_tagged_lines(
+        [handsard_line_data["text"] for handsard_line_data in handsard_lines_data]
+    )
+    for index, (_, attendance_tag) in enumerate(attendance_tagged_lines):
+        if handsard_lines_data[index]["section"] != Section.ATTENDANCE:
+            result.append({**handsard_lines_data[index], "attendance_tag": None})
+            continue
+        result.append({**handsard_lines_data[index], "attendance_tag": attendance_tag})
+
     return result

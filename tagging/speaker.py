@@ -25,19 +25,15 @@ def get_speaker_tagged_lines(
     return zip(handsard_data, speaker_tags)
 
 
-def get_speaker_tagged_handsard(
-    parsed_handsard_data, line_number_to_handsard_data_index
-):
-    result = {}
-    speaker_tagged_lines = get_speaker_tagged_lines(parsed_handsard_data)
-    for index, (_, speaker) in enumerate(speaker_tagged_lines):
-        result[index] = {
-            **line_number_to_handsard_data_index[index],
-            "speaker": (
-                speaker
-                if line_number_to_handsard_data_index[index]["section"]
-                == Section.TRANSCRIPT
-                else None
-            ),
-        }
+def get_speaker_tagged_handsard(handsard_lines_data: list[dict]):
+    result = []
+    speaker_tagged_lines = get_speaker_tagged_lines(
+        [handsard_line_data["text"] for handsard_line_data in handsard_lines_data]
+    )
+    for index, (_, spekaer) in enumerate(speaker_tagged_lines):
+        if handsard_lines_data[index]["section"] != Section.TRANSCRIPT:
+            result.append({**handsard_lines_data[index], "speaker": None})
+            continue
+        result.append({**handsard_lines_data[index], "speaker": spekaer})
+
     return result

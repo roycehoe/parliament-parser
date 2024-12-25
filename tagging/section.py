@@ -45,13 +45,10 @@ def get_section_tagged_lines(
 
 
 def get_section_tagged_handsard(
-    parsed_handsard_data, line_number_to_handsard_data_index
+    handsard_lines_data: list[dict]
 ):
-    result = {}
-    section_tagged_handsard = get_section_tagged_lines(parsed_handsard_data)
+    result = []
+    section_tagged_handsard = get_section_tagged_lines([handsard_line_data["text"] for handsard_line_data in handsard_lines_data])
     for index, (_, section) in enumerate(section_tagged_handsard):
-        result[index] = {
-            **line_number_to_handsard_data_index[index],
-            "section": section,
-        }
+        result.append({**handsard_lines_data[index], "section": section})
     return result
