@@ -60,4 +60,5 @@ def main(path):
     return handsard_index_with_speech_type
 
 
-print(json.dumps(main("./data/11-03-1994.json")))
+# print(json.dumps(main("./data/11-08-1960.json")))
+print(json.dumps(main("./data/28-11-1980.json")))
