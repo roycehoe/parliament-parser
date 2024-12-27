@@ -1,70 +1,34 @@
 import json
+from openai import OpenAI
+from dotenv import dotenv_values
 
-import html2text
+from gpt_parser.attendance import get_mp_attendance
+from gpt_parser.debate_line import get_debate_lines
+from gpt_parser.debate_title import get_debate_titles
+from gpt_parser.debate_title_lines import get_debate_title_lines
+from gpt_parser.handsard_metadata import get_handsard_metadata
+from gpt_parser.mps import get_mps
 
-from cleaining import (
-    remove_column_text,
-    remove_html_spaces,
-    remove_page_text,
-    remove_spaces,
-)
-from tagging.attendance import get_attendance_line_type, get_attendance_tagged_handsard
-from tagging.section import Section, get_section_tagged_handsard
-from tagging.speaker import get_speaker_tagged_handsard
-from tagging.speech import get_speech_tagged_handsard
-from tagging.speech_type import get_speech_type_tagged_handsard
-from tagging.topic import get_topic_tagged_handsard
-from tagging.transcript import (
-    get_transcript_data_tagged_handsard,
-)
-
-PATH = "test.json"
+API_KEY = dotenv_values(".env").get("KEY")
+client = OpenAI(api_key=API_KEY)
 
 
-def get_handsard_lines(path: str) -> list[str]:
-    h = html2text.HTML2Text(bodywidth=0)
-    with open(path) as file:
-        parliament_data = json.load(file)
-        parliament_html_full_content = parliament_data.get("htmlFullContent")
-        parliament_html_full_content = remove_html_spaces(parliament_html_full_content)
-        parliament_html_full_content = remove_column_text(parliament_html_full_content)
-        parliament_html_full_content = remove_page_text(parliament_html_full_content)
-    md_file = h.handle(parliament_html_full_content)
-    return [remove_spaces(line) for line in md_file.split("\n")]
+def main():
+    # metadata = json.loads(get_handsard_metadata(client))
+    # mps = json.loads(get_mps(client))
+
+    # attendnace = json.loads(get_mp_attendance(client, mps))
+    debate_titles = json.loads(get_debate_titles(client))
+    # return debate_titles
+    sample_title = debate_titles["debates"][0]["title"]
+    debate_title_lines = json.loads(get_debate_title_lines(client, sample_title, debate_titles))
+
+    # return {**metadata, **mps, **attendnace, **debate_without_speeches}
+    # debate_without_speeches = json.loads(get_debate_without_speeches(client))
+
+    # debate_lines = json.loads(get_debate_lines(client, debate_titles, mps))
+    # return debate_lines
+    return debate_title_lines
 
 
-def main(path):
-    parsed_handsard_data = get_handsard_lines(path)
-    handsard_line_data = [
-        {"line": i, "raw_text": data} for i, data in enumerate(parsed_handsard_data)
-    ]
-    handsard_line_data_with_section_tag = get_section_tagged_handsard(
-        handsard_line_data
-    )
-    handsard_line_data_with_transcript_tag = get_transcript_data_tagged_handsard(
-        handsard_line_data_with_section_tag
-    )
-    handsard_index_with_attendance_tag = get_attendance_tagged_handsard(
-        handsard_line_data_with_transcript_tag
-    )
-    handsard_index_with_speaker_tag = get_speaker_tagged_handsard(
-        handsard_index_with_attendance_tag
-    )
-    handsard_index_with_topic_tag = get_topic_tagged_handsard(
-        handsard_index_with_speaker_tag
-    )
-    handsard_index_with_speech_type = get_speech_type_tagged_handsard(
-        handsard_index_with_topic_tag
-    )
-    handsard_index_with_speech = get_speech_tagged_handsard(
-        handsard_index_with_speech_type
-    )
-
-    return handsard_index_with_speech
-
-
-# print(json.dumps(main("./data/11-08-1960.json")))
-# print(json.dumps(main("./data/18-07-1957.json")))
-# test = get_handsard_lines("./data/18-07-1957.json")
-# for i in test:
-#     print(i)
+print(json.dumps(main()))
