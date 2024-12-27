@@ -1,0 +1,213 @@
+```json
+{
+  "parliament_no": 1,
+  "sitting_no": 14,
+  "volume_no": 3,
+  "sitting_date": "18-07-1957",
+  "attendance": {
+    "present": [
+      {
+        "name": "Mr G. E. N. Oehlers",
+        "role": "Speaker"
+      },
+      {
+        "name": "Inche Abdul Hamid Bin Haji Jumat",
+        "role": "Minister for Local Government, Lands and Housing"
+      },
+      {
+        "name": "Inche Ahmad Bin Ibrahim",
+        "role": "Member"
+      },
+      {
+        "name": "Mr A. J. Braga",
+        "role": "Minister for Health"
+      },
+      {
+        "name": "Mr Chew Swee Kee",
+        "role": "Minister for Education"
+      },
+      {
+        "name": "Mr John Ede",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Goh Chew Chua",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Goh Tong Liang",
+        "role": "Member"
+      },
+      {
+        "name": "Mr W. A. C. Goode",
+        "role": "Chief Secretary"
+      },
+      {
+        "name": "Mr T. M. Hart",
+        "role": "Financial Secretary"
+      },
+      {
+        "name": "Mr J. M. Jumabhoy",
+        "role": "Minister for Commerce and Industry"
+      },
+      {
+        "name": "Mr R. Jumabhoy",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Lee Choon Eng",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Lee Kuan Yew",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Lim Cher Kheng",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Lim Choon Mong",
+        "role": "Member"
+      },
+      {
+        "name": "Mr R. C. H. Lim",
+        "role": "Nominated Member"
+      },
+      {
+        "name": "Mr Lim Koon Teck",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Lim Yew Hock",
+        "role": "Chief Minister"
+      },
+      {
+        "name": "Mr Mak Pak Shee",
+        "role": "Assistant Minister for Labour and Welfare"
+      },
+      {
+        "name": "Inche Mohamed Sidik Bin Haji Abdul Hamid",
+        "role": "Assistant Minister for Education"
+      },
+      {
+        "name": "Mr M. P. D. Nair",
+        "role": "Assistant Minister to the Chief Secretary"
+      },
+      {
+        "name": "Mr Ong Piah Teng",
+        "role": "Nominated Member"
+      },
+      {
+        "name": "Mr Seah Peng Chuan",
+        "role": "Member"
+      },
+      {
+        "name": "Mr E. P. Shanks",
+        "role": "Attorney-General"
+      },
+      {
+        "name": "Mr Soh Ghee Soon",
+        "role": "Member"
+      },
+      {
+        "name": "Mr G. A. P. Sutherland",
+        "role": "Nominated Member"
+      },
+      {
+        "name": "Mr Tan Theng Chiang",
+        "role": "Assistant Minister for Local Government, Lands and Housing"
+      },
+      {
+        "name": "Mr William Tan",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Francis Thomas",
+        "role": "Minister for Communications and Works"
+      },
+      {
+        "name": "Mr Wong Foo Nam",
+        "role": "Member"
+      }
+    ],
+    "absent": [
+      {
+        "name": "Mr A. R. Lazarous",
+        "role": "Member"
+      },
+      {
+        "name": "Mr Lim Ching Siong",
+        "role": "Member"
+      }
+    ]
+  },
+  "debates": [
+    {
+      "topic": "Water Standpipes for Residents",
+      "speeches": [
+        {
+          "speaker_name": "Mr William Tan",
+          "is_question": true,
+          "speech": "asked the Minister for Local Government, Lands and Housing whether steps are being or will be taken to supply more public water standpipes for the residents in Kampong Tiong Bahru, Kampong Silat and Kampong Henderson."
+        },
+        {
+          "speaker_name": "Inche Abdul Hamid Bin Haji Jumat",
+          "is_question": false,
+          "speech": "Mr Speaker, Sir, these kampongs fall within the City Council area and the provision of water standpipes is a matter for the City Council for which I am not in a position to answer."
+        },
+        {
+          "speaker_name": "Mr R. C. H. Lim",
+          "is_question": true,
+          "speech": "can the Minister tell us who is the elected representative in the City Council for that area?"
+        },
+        {
+          "speaker_name": "Mr Speaker",
+          "is_question": false,
+          "speech": "That is a different question."
+        },
+        {
+          "speaker_name": "Mr William Tan",
+          "is_question": false,
+          "speech": "Electioneering!"
+        },
+        {
+          "speaker_name": "Mr Speaker",
+          "is_question": false,
+          "speech": "Order."
+        }
+      ]
+    },
+    {
+      "topic": "Setting up of Court of Inquiry",
+      "speeches": [
+        {
+          "speaker_name": "Mr Lim Yew Hock",
+          "is_question": false,
+          "speech": "I have set up under section 6 of the Industrial Courts Ordinance a Court of Inquiry."
+        },
+        {
+          "speaker_name": "Mr Lee Kuan Yew",
+          "is_question": true,
+          "speech": "is the Minister prepared to direct the Court of Inquiry to make recommendations to contain the dispute pending the final recommendations for a settlement?"
+        },
+        {
+          "speaker_name": "Mr Lim Yew Hock",
+          "is_question": false,
+          "speech": "there may be a dispute that is coming up and therefore it is to apprehend a dispute that the Court of Inquiry was set up."
+        }
+      ]
+    },
+    {
+      "topic": "Corrupt and Improper Practices",
+      "speeches": [
+        {
+          "speaker_name": "Mr Lee Kuan Yew",
+          "is_question": false,
+          "speech": "the motion which stands in my name reads as follows: That this House is of the opinion that the terms of reference of the Commission of Inquiry on corrupt practices be extended..."
+        }
+      ]
+    }
+  ]
+}
+```

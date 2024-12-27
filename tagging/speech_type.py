@@ -1,8 +1,4 @@
 from enum import StrEnum, auto
-import re
-from typing import Iterable
-
-from tagging.section import Section
 from tagging.transcript import TranscriptLineType
 
 
@@ -11,7 +7,7 @@ class SpeechType(StrEnum):
     ANSWER = auto()
 
 
-def get_speech_type_tagged_handsard(handsard_lines_data: list[dict]):
+def get_speech_type_tagged_handsard(handsard_lines_data: list[dict]) -> list[dict]:
     result = []
 
     current_topic = None

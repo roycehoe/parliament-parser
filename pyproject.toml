@@ -10,6 +10,8 @@ python = "^3.11"
 markdownify = "^0.14.1"
 html2text = "^2024.2.26"
 pydantic = "^2.10.4"
+openai = "^1.58.1"
+python-dotenv = "^1.0.1"
 
 
 [build-system]

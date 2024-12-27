@@ -12,7 +12,7 @@ def get_speaker_tagged_lines(
     current_speaker = None
 
     handsard_lines = [
-        handsard_line_data["text"] for handsard_line_data in handsard_lines_data
+        handsard_line_data["raw_text"] for handsard_line_data in handsard_lines_data
     ]
     handsard_section = [
         handsard_line_data["section"] for handsard_line_data in handsard_lines_data

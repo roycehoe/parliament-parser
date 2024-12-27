@@ -11,10 +11,10 @@ from cleaining import (
 from tagging.attendance import get_attendance_line_type, get_attendance_tagged_handsard
 from tagging.section import Section, get_section_tagged_handsard
 from tagging.speaker import get_speaker_tagged_handsard
+from tagging.speech import get_speech_tagged_handsard
 from tagging.speech_type import get_speech_type_tagged_handsard
 from tagging.topic import get_topic_tagged_handsard
 from tagging.transcript import (
-    get_transcript_line_type,
     get_transcript_data_tagged_handsard,
 )
 
@@ -36,7 +36,7 @@ def get_handsard_lines(path: str) -> list[str]:
 def main(path):
     parsed_handsard_data = get_handsard_lines(path)
     handsard_line_data = [
-        {"line": i, "text": data} for i, data in enumerate(parsed_handsard_data)
+        {"line": i, "raw_text": data} for i, data in enumerate(parsed_handsard_data)
     ]
     handsard_line_data_with_section_tag = get_section_tagged_handsard(
         handsard_line_data
@@ -56,9 +56,15 @@ def main(path):
     handsard_index_with_speech_type = get_speech_type_tagged_handsard(
         handsard_index_with_topic_tag
     )
+    handsard_index_with_speech = get_speech_tagged_handsard(
+        handsard_index_with_speech_type
+    )
 
-    return handsard_index_with_speech_type
+    return handsard_index_with_speech
 
 
 # print(json.dumps(main("./data/11-08-1960.json")))
-print(json.dumps(main("./data/28-11-1980.json")))
+# print(json.dumps(main("./data/18-07-1957.json")))
+# test = get_handsard_lines("./data/18-07-1957.json")
+# for i in test:
+#     print(i)

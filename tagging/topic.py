@@ -15,11 +15,11 @@ def get_topic_tagged_handsard(handsard_line_data: list[dict]):
     result = []
     for index in range(len(handsard_line_data)):
         if handsard_line_data[index]["transcript_tag"] == TranscriptLineType.TITLE:
-            title = handsard_line_data[index]["text"]
+            title = handsard_line_data[index]["raw_text"]
             subtitle = None
             continue
         if handsard_line_data[index]["transcript_tag"] == TranscriptLineType.SUBTITLE:
-            subtitle = handsard_line_data[index]["text"]
+            subtitle = handsard_line_data[index]["raw_text"]
             continue
 
         result.append(
