@@ -20,8 +20,10 @@ def main():
     # attendnace = json.loads(get_mp_attendance(client, mps))
     debate_titles = json.loads(get_debate_titles(client))
     # return debate_titles
-    sample_title = debate_titles["debates"][0]["title"]
-    debate_title_lines = json.loads(get_debate_title_lines(client, sample_title, debate_titles))
+    sample_title = debate_titles["debates"][2]["title"]
+    debate_title_lines = json.loads(
+        get_debate_title_lines(client, sample_title, debate_titles)
+    )
 
     # return {**metadata, **mps, **attendnace, **debate_without_speeches}
     # debate_without_speeches = json.loads(get_debate_without_speeches(client))

@@ -10,7 +10,17 @@ eg. {
     end_line: 18
 }
 
-With a given debate title, you are to determine the start line of the debate and the end line of the debate. A debate is assumed to have started when the given debate title appears in the document. The debate is assume to last an indefinite amount of lines unless the document ends, or a new debate starts.
+With a given debate title, you are to determine the start line of the debate and the end line of the debate. 
+
+start_line:
+    A debate is assumed to have started when the given debate title first appears in the document.
+    This line number would be your start_line
+    
+end_line:
+    A debate is assumed to last an indefinite amount of lines unless:
+        1. The document ends
+        2. You encounter the next debate title
+    This line number would be your end_line
 
 You are to give return the absolute line number of the start and end of the debate. This includes any formatting in the document.
 
@@ -18,14 +28,14 @@ You are to give return the absolute line number of the start and end of the deba
 
 from openai import OpenAI
 
-from markdown import get_handsard_lines
+from markdown import get_handsard_lines, get_handsard_lines_with_line_markers
 
 
 def _get_prompt(debate_title: str, debate_titles: dict):
     return f"""{PROMPT}
 
 
-For context, here are all the debates that went on in parliament: {debate_titles}
+Purely for context, here are all the debate titles: {debate_titles}
 
 This is the debate title I would like you to extract data from: {debate_title}
 
@@ -36,7 +46,7 @@ When you finish this representation, reply with a JSON and a JSON only of the cr
 def get_debate_title_lines(
     openAI_client: OpenAI, debate_title: str, debate_titles: dict
 ) -> str:
-    handsard_lines = get_handsard_lines("./data/18-07-1957.json")
+    handsard_lines = get_handsard_lines_with_line_markers("./data/18-07-1957.json")
 
     stream = openAI_client.chat.completions.create(
         model="gpt-4o-mini",
