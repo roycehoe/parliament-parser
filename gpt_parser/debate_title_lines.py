@@ -10,32 +10,29 @@ eg. {
     end_line: 18
 }
 
-With a given debate title, you are to determine the start line of the debate and the end line of the debate. 
+Each debate will start with a debate title, and optionally, a debate subtitle. Following that would be the debate content. A debate ends when a new debate title, and optionally, a debate subtitle is encountered. Otherwise, a debate ends once the end of the document is reached.
+
+With a given debate title, you are to determine the start line of the debate content and the end line of the debate content.
 
 start_line:
-    A debate is assumed to have started when the given debate title first appears in the document.
-    This line number would be your start_line
+    The starting line of the debate content
     
 end_line:
-    A debate is assumed to last an indefinite amount of lines unless:
-        1. The document ends
-        2. You encounter the next debate title
-    This line number would be your end_line
+    The ending line of the debate content
 
-You are to give return the absolute line number of the start and end of the debate. This includes any formatting in the document.
-
+You are to give return the absolute line number of the start and end of the debate content. This includes any formatting in the document.
 """
 
 from openai import OpenAI
 
-from markdown import get_handsard_lines, get_handsard_lines_with_line_markers
+from markdown import get_handsard_lines_with_line_markers
 
 
-def _get_prompt(debate_title: str, debate_titles: dict):
+def _get_prompt(debate_title: dict, debate_titles: list[dict]):
     return f"""{PROMPT}
 
 
-Purely for context, here are all the debate titles: {debate_titles}
+For context, here are all the debate titles: {debate_titles}
 
 This is the debate title I would like you to extract data from: {debate_title}
 
@@ -44,7 +41,7 @@ When you finish this representation, reply with a JSON and a JSON only of the cr
 
 
 def get_debate_title_lines(
-    openAI_client: OpenAI, debate_title: str, debate_titles: dict
+    openAI_client: OpenAI, debate_title: dict, debate_titles: list[dict]
 ) -> str:
     handsard_lines = get_handsard_lines_with_line_markers("./data/18-07-1957.json")
 
@@ -53,7 +50,12 @@ def get_debate_title_lines(
         messages=[
             {
                 "role": "user",
-                "content": f"{_get_prompt(debate_title, debate_titles)}{handsard_lines}",
+                "content": f"""
+{_get_prompt(debate_title, debate_titles)}
+
+```start_of_document
+{handsard_lines}
+```end_of_document""",
             }
         ],
         response_format={"type": "json_object"},

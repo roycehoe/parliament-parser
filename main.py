@@ -13,24 +13,28 @@ API_KEY = dotenv_values(".env").get("KEY")
 client = OpenAI(api_key=API_KEY)
 
 
+def get_non_debates_data():
+    metadata = json.loads(get_handsard_metadata(client))
+    mps = json.loads(get_mps(client))
+    attendnace = json.loads(get_mp_attendance(client, mps))
+
+    return {**metadata, **mps, **attendnace}
+
+
+def get_debates():
+    debates_with_titles = json.loads(get_debate_titles(client))
+    debates: list[dict] = debates_with_titles["debates"]
+    return debates
+
+    debates_with_title_lines = []
+    for debate in debates:
+        debate_title_lines = json.loads(get_debate_title_lines(client, debate, debates))
+        debates_with_title_lines.append({**debate, **debate_title_lines})
+    return debates_with_title_lines
+
+
 def main():
-    # metadata = json.loads(get_handsard_metadata(client))
-    # mps = json.loads(get_mps(client))
-
-    # attendnace = json.loads(get_mp_attendance(client, mps))
-    debate_titles = json.loads(get_debate_titles(client))
-    # return debate_titles
-    sample_title = debate_titles["debates"][2]["title"]
-    debate_title_lines = json.loads(
-        get_debate_title_lines(client, sample_title, debate_titles)
-    )
-
-    # return {**metadata, **mps, **attendnace, **debate_without_speeches}
-    # debate_without_speeches = json.loads(get_debate_without_speeches(client))
-
-    # debate_lines = json.loads(get_debate_lines(client, debate_titles, mps))
-    # return debate_lines
-    return debate_title_lines
+    return get_debates()
 
 
 print(json.dumps(main()))
