@@ -1,50 +1,141 @@
-[
-  {
-    "title": "WATER STANDPIPES FOR RESIDENTS IN KAMPONG TIONG BAHRU, KAMPONG SILAT AND KAMPONG HENDERSON",
-    "subtitle": null,
-    "title_line": 77,
-    "subtitle_line": null,
-    "start_line": 79,
-    "end_line": 89
-  },
-  {
-    "title": "SINGAPORE HARBOUR BOARD (Setting up of Court of Inquiry) (Statement by the Minister for Labour and Welfare)",
-    "subtitle": null,
-    "title_line": 93,
-    "subtitle_line": null,
-    "start_line": 95,
-    "end_line": 121
-  },
-  {
-    "title": "ADJOURNMENT TO A LATER DAY MOTION",
-    "subtitle": null,
-    "title_line": 125,
-    "subtitle_line": null,
-    "start_line": 127,
-    "end_line": 137
-  },
-  {
-    "title": "LABOUR (PROCEDURE - RECIPROCAL PROVISIONS)",
-    "subtitle": "REGULATIONS, 1957",
-    "title_line": 141,
-    "subtitle_line": 143,
-    "start_line": 147,
-    "end_line": 155
-  },
-  {
-    "title": "SINGAPORE HARBOUR BOARD (Setting up of Court of Inquiry)",
-    "subtitle": null,
-    "title_line": 159,
-    "subtitle_line": null,
-    "start_line": 161,
-    "end_line": 175
-  },
-  {
-    "title": "COMMISSION OF INQUIRY INTO CORRUPT AND IMPROPER PRACTICES BY CANDIDATES FOR ELECTIONS AND THEIR CONFEDERATES",
-    "subtitle": null,
-    "title_line": 179,
-    "subtitle_line": null,
-    "start_line": 181,
-    "end_line": 700
+{
+  "parliament_no": 1,
+  "sitting_no": 14,
+  "volume_no": 3,
+  "sitting_date": "18-07-1957",
+  "volume": "FIRST SERIES | VOLUME 3 PART II OF SESSION 1956-7",
+  "MPs": [
+    { "name": "Mr G. E. N. Oehlers, O.B.E.", "role": "Speaker" },
+    {
+      "name": "Inche Abdul Hamid Bin Haji Jumat",
+      "role": "Minister for Local Government, Lands and Housing"
+    },
+    { "name": "Inche Ahmad Bin Ibrahim", "role": "" },
+    { "name": "Mr A. J. Braga", "role": "Minister for Health" },
+    { "name": "Mr Chew Swee Kee", "role": "Minister for Education" },
+    { "name": "Mr John Ede", "role": "" },
+    { "name": "Mr Goh Chew Chua", "role": "" },
+    { "name": "Mr Goh Tong Liang", "role": "" },
+    {
+      "name": "Mr W. A. C. Goode, C.M.G.",
+      "role": "Chief Secretary (ex-officio)"
+    },
+    {
+      "name": "Mr T. M. Hart, C.M.G.",
+      "role": "Financial Secretary (ex-officio)"
+    },
+    {
+      "name": "Mr J. M. Jumabhoy",
+      "role": "Minister for Commerce and Industry"
+    },
+    { "name": "Mr R. Jumabhoy, C.B.E., M.C.H., J.P.", "role": "" },
+    { "name": "Mr Lee Choon Eng", "role": "" },
+    { "name": "Mr Lee Kuan Yew", "role": "" },
+    { "name": "Mr Lim Cher Kheng", "role": "" },
+    { "name": "Mr Lim Choon Mong", "role": "" },
+    { "name": "Mr R. C. H. Lim", "role": "Nominated" },
+    { "name": "Mr Lim Koon Teck", "role": "" },
+    {
+      "name": "Mr Lim Yew Hock",
+      "role": "Chief Minister and Minister for Labour and Welfare"
+    },
+    {
+      "name": "Mr Mak Pak Shee",
+      "role": "Assistant Minister for Labour and Welfare"
+    },
+    {
+      "name": "Inche Mohamed Sidik Bin Haji Abdul Hamid",
+      "role": "Assistant Minister for Education"
+    },
+    {
+      "name": "Mr M. P. D. Nair",
+      "role": "Assistant Minister to the Chief Secretary"
+    },
+    { "name": "Mr Ong Piah Teng, O.B.E., S.C.H.", "role": "Nominated" },
+    { "name": "Mr Seah Peng Chuan", "role": "" },
+    { "name": "Mr E. P. Shanks", "role": "Attorney-General (ex-officio)" },
+    { "name": "Mr Soh Ghee Soon", "role": "" },
+    { "name": "Mr G. A. P. Sutherland", "role": "Nominated" },
+    {
+      "name": "Mr Tan Theng Chiang",
+      "role": "Assistant Minister for Local Government, Lands and Housing"
+    },
+    { "name": "Mr William Tan", "role": "" },
+    {
+      "name": "Mr Francis Thomas",
+      "role": "Minister for Communications and Works"
+    },
+    { "name": "Mr Wong Foo Nam", "role": "" },
+    { "name": "Mr A. R. Lazarous", "role": "Absent" },
+    { "name": "Mr Lim Ching Siong", "role": "Absent" }
+  ],
+  "attendance": {
+    "present": [
+      { "name": "Mr G. E. N. Oehlers, O.B.E.", "role": "Speaker" },
+      {
+        "name": "Inche Abdul Hamid Bin Haji Jumat",
+        "role": "Minister for Local Government, Lands and Housing"
+      },
+      { "name": "Inche Ahmad Bin Ibrahim", "role": "" },
+      { "name": "Mr A. J. Braga", "role": "Minister for Health" },
+      { "name": "Mr Chew Swee Kee", "role": "Minister for Education" },
+      { "name": "Mr John Ede", "role": "" },
+      { "name": "Mr Goh Chew Chua", "role": "" },
+      { "name": "Mr Goh Tong Liang", "role": "" },
+      {
+        "name": "Mr W. A. C. Goode, C.M.G.",
+        "role": "Chief Secretary (ex-officio)"
+      },
+      {
+        "name": "Mr T. M. Hart, C.M.G.",
+        "role": "Financial Secretary (ex-officio)"
+      },
+      {
+        "name": "Mr J. M. Jumabhoy",
+        "role": "Minister for Commerce and Industry"
+      },
+      { "name": "Mr R. Jumabhoy, C.B.E., M.C.H., J.P.", "role": "" },
+      { "name": "Mr Lee Choon Eng", "role": "" },
+      { "name": "Mr Lee Kuan Yew", "role": "" },
+      { "name": "Mr Lim Cher Kheng", "role": "" },
+      { "name": "Mr Lim Choon Mong", "role": "" },
+      { "name": "Mr R. C. H. Lim", "role": "Nominated" },
+      { "name": "Mr Lim Koon Teck", "role": "" },
+      {
+        "name": "Mr Lim Yew Hock",
+        "role": "Chief Minister and Minister for Labour and Welfare"
+      },
+      {
+        "name": "Mr Mak Pak Shee",
+        "role": "Assistant Minister for Labour and Welfare"
+      },
+      {
+        "name": "Inche Mohamed Sidik Bin Haji Abdul Hamid",
+        "role": "Assistant Minister for Education"
+      },
+      {
+        "name": "Mr M. P. D. Nair",
+        "role": "Assistant Minister to the Chief Secretary"
+      },
+      { "name": "Mr Ong Piah Teng, O.B.E., S.C.H.", "role": "Nominated" },
+      { "name": "Mr Seah Peng Chuan", "role": "" },
+      { "name": "Mr E. P. Shanks", "role": "Attorney-General (ex-officio)" },
+      { "name": "Mr Soh Ghee Soon", "role": "" },
+      { "name": "Mr G. A. P. Sutherland", "role": "Nominated" },
+      {
+        "name": "Mr Tan Theng Chiang",
+        "role": "Assistant Minister for Local Government, Lands and Housing"
+      },
+      { "name": "Mr William Tan", "role": "" },
+      {
+        "name": "Mr Francis Thomas",
+        "role": "Minister for Communications and Works"
+      },
+      { "name": "Mr Wong Foo Nam", "role": "" }
+    ],
+    "absent": [
+      { "name": "Mr A. R. Lazarous", "role": "Absent" },
+      { "name": "Mr Lim Ching Siong", "role": "Absent" }
+    ]
   }
-]
+}

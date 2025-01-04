@@ -10,6 +10,7 @@ Attendance:
 
 """
 
+import json
 from openai import OpenAI
 
 from markdown import get_handsard_lines
@@ -25,15 +26,15 @@ When you finish this representation, reply with a JSON and a JSON only of the cr
 """
 
 
-def get_mp_attendance(openAI_client: OpenAI, mps: dict) -> str:
-    handsard_lines = get_handsard_lines("./data/18-07-1957.json")
+def get_mp_attendance(openAI_client: OpenAI, mps: dict, file_path: str) -> dict:
+    handsard_lines = get_handsard_lines(file_path)
 
     stream = openAI_client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": f"{PROMPT}{handsard_lines}"}],
+        messages=[{"role": "user", "content": f"{get_prompt(mps)}{handsard_lines}"}],
         response_format={"type": "json_object"},
         max_tokens=16384,
     )
     if gpt_completion := stream.choices[0].message.content:
-        return gpt_completion
+        return json.loads(gpt_completion)
     raise Exception
