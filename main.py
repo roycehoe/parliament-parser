@@ -26,12 +26,6 @@ def get_debates():
     debates: list[dict] = debates_with_titles["debates"]
     return debates
 
-    debates_with_title_lines = []
-    for debate in debates:
-        debate_title_lines = json.loads(get_debate_title_lines(client, debate, debates))
-        debates_with_title_lines.append({**debate, **debate_title_lines})
-    return debates_with_title_lines
-
 
 def main():
     return get_debates()
